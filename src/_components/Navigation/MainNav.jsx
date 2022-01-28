@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AppBar, Box, Toolbar, Typography, Container, Link } from '@mui/material';
 
-const pages = [{name: 'Patch', url: '/update'},];
+const pages = [{name: 'Home', url: '/'}, {name: 'Patch', url: '/update'}];
 
 const MainNav = () => {
   

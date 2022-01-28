@@ -10,13 +10,18 @@ class PatchPage extends Component {
 
         this.state = {
             patch: null,
+            fetchingPatch: false
         };
+        this.updatePatch = this.updatePatch.bind(this);
     }
 
     updatePatch() {
+        this.setState({fetchingPatch: true})
         fetch(`${config.apiUrl}/api/patch/update`)
         .then((res) => res.json() )
         .then((json) => {
+            this.setState({fetchingPatch: false})
+            this.setState({patch: json})
             console.log('patch', json)
         })
     }
@@ -31,13 +36,14 @@ class PatchPage extends Component {
         })
     }
 
+
     render() {
         return (
             <div className="col-md-6 col-md-offset-3">
                 <div>
                     This is the patch page {this.state.patch ? this.state.patch : ''}
                 </div>
-                <Button variant="contained" onClick={this.updatePatch}>Update Patch</Button>
+                <Button variant="contained" disabled={this.state.fetchingPatch} onClick={this.updatePatch}>Update Patch</Button>
             </div>
         );
     }
